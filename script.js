@@ -1,205 +1,201 @@
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Loader
-    setTimeout(function() {
-        const loader = document.querySelector('.loader-wrapper');
-        loader.classList.add('hidden');
-    }, 1500);
+// Navigation mobile
+const hamburger = document.querySelector(".nav-toggle")
+const navMenu = document.querySelector(".nav-menu")
 
-    // Header scroll effect
-    const header = document.querySelector('header');
-    const backToTop = document.querySelector('.back-to-top');
+if (hamburger && navMenu) {
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active")
+    navMenu.classList.toggle("active")
+  })
 
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-            backToTop.classList.add('active');
-        } else {
-            header.classList.remove('scrolled');
-            backToTop.classList.remove('active');
-        }
-    });
+  // Fermer le menu mobile lors du clic sur un lien
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      hamburger.classList.remove("active")
+      navMenu.classList.remove("active")
+    })
+  })
 
-    // Mobile menu toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const navLinksItems = document.querySelectorAll('.nav-links li a');
-
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
-
-    // Close mobile menu when a nav link is clicked
-    navLinksItems.forEach(item => {
-        item.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-        });
-    });
-
-    // Active nav link on scroll
-    const sections = document.querySelectorAll('section');
-    
-    window.addEventListener('scroll', function() {
-        let current = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            
-            if (window.scrollY >= (sectionTop - 200)) {
-                current = section.getAttribute('id');
-            }
-        });
-        
-        navLinksItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === `#${current}`) {
-                item.classList.add('active');
-            }
-        });
-    });
-
-    // Portfolio filter
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Remove active class from all buttons
-            filterBtns.forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
-            this.classList.add('active');
-            
-            const filterValue = this.getAttribute('data-filter');
-            
-            portfolioItems.forEach(item => {
-                if (filterValue === 'all' || item.classList.contains(filterValue)) {
-                    item.style.display = 'block';
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                    }, 200);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 200);
-                }
-            });
-        });
-    });
-
-    // Testimonial slider
-    const testimonialItems = document.querySelectorAll('.testimonial-item');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    let currentIndex = 0;
-
-    function showTestimonial(index) {
-        testimonialItems.forEach(item => item.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-        
-        testimonialItems[index].classList.add('active');
-        dots[index].classList.add('active');
+  // Fermer le menu en cliquant en dehors
+  document.addEventListener("click", (e) => {
+    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+      hamburger.classList.remove("active")
+      navMenu.classList.remove("active")
     }
+  })
+}
 
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', function() {
-            currentIndex = index;
-            showTestimonial(currentIndex);
-        });
-    });
+// Navbar au scroll
+window.addEventListener("scroll", () => {
+  const navbar = document.querySelector(".navbar")
+  if (window.scrollY > 50) {
+    navbar.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)"
+  } else {
+    navbar.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)"
+  }
+})
 
-    prevBtn.addEventListener('click', function() {
-        currentIndex = (currentIndex - 1 + testimonialItems.length) % testimonialItems.length;
-        showTestimonial(currentIndex);
-    });
+// Animation des éléments au scroll
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: "0px 0px -50px 0px",
+}
 
-    nextBtn.addEventListener('click', function() {
-        currentIndex = (currentIndex + 1) % testimonialItems.length;
-        showTestimonial(currentIndex);
-    });
-
-    // Auto slide testimonials
-    setInterval(function() {
-        currentIndex = (currentIndex + 1) % testimonialItems.length;
-        showTestimonial(currentIndex);
-    }, 5000);
-
-    // Skills animation
-    const skillBars = document.querySelectorAll('.skill-progress');
-    
-    const skillsSection = document.querySelector('.skills');
-    
-    const skillsObserver = new IntersectionObserver(function(entries) {
-        if (entries[0].isIntersecting) {
-            skillBars.forEach(bar => {
-                const width = bar.getAttribute('style').match(/width: (\d+)%/)[1];
-                bar.style.width = '0';
-                setTimeout(() => {
-                    bar.style.width = width + '%';
-                }, 200);
-            });
-        }
-    }, { threshold: 0.5 });
-    
-    skillsObserver.observe(skillsSection);
-
-    // Contact form submission
-    const contactForm = document.getElementById('contactForm');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Here you would typically send the form data to a server
-            // For this example, we'll just show an alert
-            alert(`Merci ${name} pour votre message! Nous vous contacterons bientôt.`);
-            
-            // Reset form
-            contactForm.reset();
-        });
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = "1"
+      entry.target.style.transform = "translateY(0)"
     }
+  })
+}, observerOptions)
 
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+// Observer les éléments à animer
+document.addEventListener("DOMContentLoaded", () => {
+  const elementsToAnimate = document.querySelectorAll(
+    ".project-card, .resume-item, .award-item, .newspaper-article, .practice-card",
+  )
 
-    // Animation on scroll
-    const animateElements = document.querySelectorAll('.about-content, .portfolio-item, .skills-content, .testimonial-slider, .contact-content');
-    
-    const animateObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-            }
-        });
-    }, { threshold: 0.1 });
-    
-    animateElements.forEach(element => {
-        animateObserver.observe(element);
-    });
-});
+  elementsToAnimate.forEach((el) => {
+    el.style.opacity = "0"
+    el.style.transform = "translateY(30px)"
+    el.style.transition = "opacity 0.8s ease, transform 0.8s ease"
+    observer.observe(el)
+  })
+})
+
+// Gestion du formulaire de contact
+const contactForm = document.querySelector("#contactForm")
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault()
+
+    const submitBtn = this.querySelector(".submit-btn")
+    const originalText = submitBtn.textContent
+
+    // Animation de soumission
+    submitBtn.textContent = "Envoi en cours..."
+    submitBtn.disabled = true
+    submitBtn.style.background = "#666"
+
+    // Simulation d'envoi
+    setTimeout(() => {
+      submitBtn.textContent = "Message envoyé ✓"
+      submitBtn.style.background = "#28a745"
+
+      setTimeout(() => {
+        submitBtn.textContent = originalText
+        submitBtn.disabled = false
+        submitBtn.style.background = ""
+        this.reset()
+      }, 2000)
+    }, 1500)
+  })
+}
+
+// Smooth scroll pour les liens internes
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault()
+    const target = document.querySelector(this.getAttribute("href"))
+    if (target) {
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
+  })
+})
+
+// Effet de hover sur les cartes
+document.querySelectorAll(".project-card, .newspaper-article").forEach((card) => {
+  card.addEventListener("mouseenter", function () {
+    this.style.transform = "translateY(-5px)"
+  })
+
+  card.addEventListener("mouseleave", function () {
+    this.style.transform = "translateY(0)"
+  })
+})
+
+// Gestion des états de focus pour l'accessibilité
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Tab") {
+    document.body.classList.add("keyboard-navigation")
+  }
+})
+
+document.addEventListener("mousedown", () => {
+  document.body.classList.remove("keyboard-navigation")
+})
+
+// Fonctions pour le slider
+let currentSlideIndex = 0
+let slideInterval
+
+function showSlide(index) {
+  const slides = document.querySelectorAll(".hero-slide")
+  const dots = document.querySelectorAll(".slider-dot")
+
+  if (slides.length === 0) return
+
+  slides.forEach((slide) => slide.classList.remove("active"))
+  dots.forEach((dot) => dot.classList.remove("active"))
+
+  slides[index].classList.add("active")
+  if (dots[index]) dots[index].classList.add("active")
+
+  currentSlideIndex = index
+}
+
+function nextSlide() {
+  const slides = document.querySelectorAll(".hero-slide")
+  if (slides.length === 0) return
+
+  currentSlideIndex = (currentSlideIndex + 1) % slides.length
+  showSlide(currentSlideIndex)
+}
+
+function previousSlide() {
+  const slides = document.querySelectorAll(".hero-slide")
+  if (slides.length === 0) return
+
+  currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length
+  showSlide(currentSlideIndex)
+}
+
+function changeSlide(index) {
+  showSlide(index)
+  // Redémarrer l'auto-play
+  clearInterval(slideInterval)
+  startSlideshow()
+}
+
+function startSlideshow() {
+  slideInterval = setInterval(nextSlide, 5000)
+}
+
+// Initialiser le slider
+document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".hero-slide")
+  if (slides.length > 0) {
+    startSlideshow()
+  }
+})
+
+// Animation simple pour les éléments
+function animateOnScroll() {
+  const elements = document.querySelectorAll(".practice-card")
+  elements.forEach((element) => {
+    const elementTop = element.getBoundingClientRect().top
+    const elementVisible = 150
+
+    if (elementTop < window.innerHeight - elementVisible) {
+      element.style.opacity = "1"
+      element.style.transform = "translateY(0)"
+    }
+  })
+}
+
+window.addEventListener("scroll", animateOnScroll)
+document.addEventListener("DOMContentLoaded", animateOnScroll)
