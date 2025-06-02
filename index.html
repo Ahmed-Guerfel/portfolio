@@ -3,397 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed Ghouma | Graphic Designer</title>
+    <title>Ahmed Guerfell - Culture Worker & Artist</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Loader -->
-    <div class="loader-wrapper">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Header -->
-    <header>
-        <div class="container">
+    <!-- Navigation stable -->
+    <nav class="navbar">
+        <div class="nav-container">
             <div class="logo">
-                <a href="#home">Mohamed Ghouma<span>.</span></a>
+                <div class="logo-circle">
+                    <div class="logo-rays"></div>
+                    <div class="logo-waves"></div>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">AHMED GUERFELL</span>
+                    <span class="logo-sub">CULTURE WORKER</span>
+                </div>
             </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </nav>
-        </div>
-    </header>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="social-practice.html" class="nav-link">Social Practice</a>
+                <a href="artistic-practice.html" class="nav-link">Artistic Practice</a>
+                <a href="culture-management.html" class="nav-link">Culture Management</a>
+                <a href="public-speaking.html" class="nav-link">Public Speaking</a>
+                <a href="media-coverage.html" class="nav-link">Media Coverage</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Mohamed <span>Ghouma</span></h1>
-                    <h2>Graphic Designer</h2>
-                    <p>I transform your ideas into captivating designs that tell your story.</p>
-                    <div class="hero-btns">
-                        <a href="#portfolio" class="btn primary-btn">View my work</a>
-                        <a href="#contact" class="btn secondary-btn">Contact me</a>
-                    </div>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-behance"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-dribbble"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="m1.jpg" alt="Mohamed Ghouma">
-                    <div class="shape"></div>
-                </div>
+            <button class="nav-toggle" id="mobile-menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section avec texte mieux organisé -->
+    <section class="hero-section">
+        <div class="hero-background">
+            <div class="hero-slide active" style="background-image: url('images/20.webp');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="hero-slide" style="background-image: url('images/21.webp');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="hero-slide" style="background-image:url('images/22.webp') ;">
+                <div class="slide-overlay"></div>
+            </div>
+        </div>
+
+
+
+      
+
+        <!-- Navigation du slider -->
+        <div class="slider-controls">
+            <div class="slider-indicators">
+                <button class="slider-dot active" onclick="changeSlide(0)"></button>
+                <button class="slider-dot" onclick="changeSlide(1)"></button>
+                <button class="slider-dot" onclick="changeSlide(2)"></button>
+            </div>
+            <div class="slider-arrows">
+                <button class="slider-arrow prev" onclick="previousSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-arrow next" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- Section Aperçu des Pratiques -->
+    <section class="practices-preview">
         <div class="container">
             <div class="section-header">
-                <h3>About Me</h3>
-                <h2>Who Am I?</h2>
+                <h2>My Areas of Expertise</h2>
+                <p>Discover the different facets of my artistic and cultural work</p>
             </div>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Mohamed Ghouma at work">
-                    <div class="experience">
-                        <span class="number">7+</span>
-                        <span class="text">Years of Experience</span>
+            
+            <div class="practices-grid">
+                <div class="practice-card">
+                    <div class="practice-icon">
+                        <i class="fas fa-users"></i>
                     </div>
+                    <h3>Social Practice</h3>
+                    <p>Community initiatives and social development projects through art.</p>
+                    <a href="social-practice.html" class="practice-link">
+                        <span>Explore</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <div class="about-text">
-                    <h3>Passionate Graphic Designer based in Tunisia </h3>
-                    <p>I'm Mohamed Ghouma, a graphic designer with over 7 years of experience in creating visual identities, marketing materials, and user interfaces. My passion is creating designs that not only catch the eye but effectively communicate my clients' messages.</p>
-                    <p>Each project is a new creative adventure for me. I enjoy collaborating closely with my clients to understand their needs and transform their ideas into impactful visual realities.</p>
-                    <div class="about-info">
-                        <div class="info-item">
-                            <span class="info-title">Name:</span>
-                            <span class="info-value">Mohamed Ghouma</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-title">Email:</span>
-                            <span class="info-value">mohamed@gmail.com</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-title">Phone: </span>
-                            <span class="info-value">+216 20611061 </span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-title">Availability:</span>
-                            <span class="info-value">Freelance / Full-time</span>
-                        </div>
+                
+                <div class="practice-card">
+                    <div class="practice-icon">
+                        <i class="fas fa-palette"></i>
                     </div>
-                    <a href="#" class="btn primary-btn">Download CV</a>
+                    <h3>Artistic Practice</h3>
+                    <p>Contemporary artistic creations and innovative performances.</p>
+                    <a href="artistic-practice.html" class="practice-link">
+                        <span>Explore</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h3>My Portfolio</h3>
-                <h2>Recent Works</h2>
-            </div>
-            <div class="portfolio-filter">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="branding">Branding</button>
-                <button class="filter-btn" data-filter="print">Print</button>
-                <button class="filter-btn" data-filter="web">Web Design</button>
-                <button class="filter-btn" data-filter="illustration">Illustration</button>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item branding">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Branding project">
+                
+                <div class="practice-card">
+                    <div class="practice-icon">
+                        <i class="fas fa-cogs"></i>
                     </div>
-                    <div class="portfolio-info">
-                        <h3>Café Lumière Brand Identity</h3>
-                        <p>Branding</p>
-                        <a href="#" class="portfolio-link"><i class="fas fa-plus"></i></a>
-                    </div>
+                    <h3>Culture Management</h3>
+                    <p>Management and direction of cultural projects and artistic institutions.</p>
+                    <a href="culture-management.html" class="practice-link">
+                        <span>Explore</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <div class="portfolio-item web">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Web design project">
+                
+                <div class="practice-card">
+                    <div class="practice-icon">
+                        <i class="fas fa-microphone"></i>
                     </div>
-                    <div class="portfolio-info">
-                        <h3>Eco-Habitat Website</h3>
-                        <p>Web Design</p>
-                        <a href="#" class="portfolio-link"><i class="fas fa-plus"></i></a>
-                    </div>
-                </div>
-                <div class="portfolio-item print">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Print project">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Music Festival Brochure</h3>
-                        <p>Print</p>
-                        <a href="#" class="portfolio-link"><i class="fas fa-plus"></i></a>
-                    </div>
-                </div>
-                <div class="portfolio-item illustration">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="Illustration project">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>"Urban Nature" Illustration Series</h3>
-                        <p>Illustration</p>
-                        <a href="#" class="portfolio-link"><i class="fas fa-plus"></i></a>
-                    </div>
-                </div>
-                <div class="portfolio-item branding">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1634942536790-29fac5957461?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Branding project">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Creative Workshop Brand Identity</h3>
-                        <p>Branding</p>
-                        <a href="#" class="portfolio-link"><i class="fas fa-plus"></i></a>
-                    </div>
-                </div>
-                <div class="portfolio-item web">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Web design project">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Fitness+ Mobile App</h3>
-                        <p>Web Design</p>
-                        <a href="#" class="portfolio-link"><i class="fas fa-plus"></i></a>
-                    </div>
+                    <h3>Public Speaking</h3>
+                    <p>Conferences and interventions on art, culture and social change.</p>
+                    <a href="public-speaking.html" class="practice-link">
+                        <span>Explore</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
+    <!-- Section Citation -->
+    <section class="quote-section">
         <div class="container">
-            <div class="section-header">
-                <h3>My Skills</h3>
-                <h2>What I'm Good At</h2>
-            </div>
-            <div class="skills-content">
-                <div class="skills-text">
-                    <p>As a versatile graphic designer, I've developed expertise in several design fields. I constantly strive to improve my skills and stay up-to-date with the latest trends and technologies.</p>
-                    <a href="#contact" class="btn primary-btn">Let's work together</a>
-                </div>
-                <div class="skills-bars">
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <p>Adobe Photoshop</p>
-                            <p class="percent">95%</p>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 95%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <p>Adobe Illustrator</p>
-                            <p class="percent">90%</p>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <p>Adobe InDesign</p>
-                            <p class="percent">85%</p>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <p>Figma</p>
-                            <p class="percent">80%</p>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <p>UI/UX Design</p>
-                            <p class="percent">75%</p>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 75%"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="quote-content">
+                <blockquote>
+                    "We Belive That Art Is a Way Of Resistance "
+                </blockquote>
+                <cite>— Ahmed Guerfell</cite>
             </div>
         </div>
     </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h3>Testimonials</h3>
-                <h2>What My Clients Say</h2>
-            </div>
-            <div class="testimonial-slider">
-                <div class="testimonial-item active">
-                    <div class="testimonial-content">
-                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-                        <p>Mohamed completely transformed our company's visual identity. His work exceeded all our expectations and had a significant impact on our brand image.</p>
-                        <div class="client-info">
-                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sophie Martin">
-                            <div class="client-details">
-                                <h4>Salma</h4>
-                                <p>Marketing Director, Lumina</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-content">
-                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-                        <p>Working with Mohamed was an exceptional experience. He captured the essence of our project and translated it into a design that is both elegant and functional.</p>
-                        <div class="client-info">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Thomas Wilson">
-                            <div class="client-details">
-                                <h4>Iheb Ghrairi</h4>
-                                <p>Founder, Creative Studio</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-content">
-                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-                        <p>Mohamed's creativity and professionalism are impressive. He understood our needs and responded with innovative and impactful graphic solutions.</p>
-                        <div class="client-info">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Leah Bernard">
-                            <div class="client-details">
-                                <h4>Dhouha</h4>
-                                <p>Communications Manager, EcoVert</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-controls">
-                <button class="prev-btn"><i class="fas fa-arrow-left"></i></button>
-                <div class="testimonial-dots">
-                    <span class="dot active"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
-                <button class="next-btn"><i class="fas fa-arrow-right"></i></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h3>Contact</h3>
-                <h2>Let's Discuss Your Project</h2>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="text">
-                            <h4>Address</h4>
-                            <p>Gabes-Tunisia 6000 </p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="icon"><i class="fas fa-envelope"></i></div>
-                        <div class="text">
-                            <h4>Email</h4>
-                            <p>contact@mohamedghouma.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="icon"><i class="fas fa-phone-alt"></i></div>
-                        <div class="text">
-                            <h4>Phone</h4>
-                            <p>+216 20611061</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="icon"><i class="fas fa-globe"></i></div>
-                        <div class="text">
-                            <h4>Availability</h4>
-                            <p>Monday - Friday, 9am - 6pm</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Your message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn primary-btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <a href="#home">MG<span>.</span></a>
-                    <p>Creating designs that inspire and communicate.</p>
-                </div>
-                <div class="footer-social">
-                    <a href="#" class="social-icon"><i class="fab fa-behance"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-dribbble"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 Mohamed Ghouma. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <a href="#home" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
     <script src="script.js"></script>
 </body>
