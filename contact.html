@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Ahmed Guerfell</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-circle">
+          <div class="logo-rays"></div>
+          <div class="logo-waves"></div>
+        </div>
+        <div class="logo-text">
+          <span class="logo-main">AHMED GUERFELL</span>
+          <span class="logo-sub">CULTURE WORKER</span>
+        </div>
+      </div>
+
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="social-practice.html" class="nav-link">Social practice</a>
+        <a href="artistic-practice.html" class="nav-link">Artistic practice</a>
+        <a href="culture-management.html" class="nav-link">Culture management</a>
+        <a href="public-speaking.html" class="nav-link">Public speaking</a>
+        <a href="media-coverage.html" class="nav-link">Media coverage</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </div>
+
+      <button class="nav-toggle" id="mobile-menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact">
+    <div class="section-bg"></div>
+    <div class="section-header">
+      <h1>Contact</h1>
+    </div>
+
+    <div class="contact-content">
+      <div class="contact-info">
+        <h2>WE'D LOVE TO HEAR FROM YOU</h2>
+        <h3>Get in Touch</h3>
+        <p>I appreciate your interest in my work.</p>
+        <p>I appreciate your interest in my work.
+
+          Whether you have questions, would like to discuss potential collaborations, or need additional information...
+        </p>
+        <p>I’m here to help.</p>
+
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Send me a Message</h3>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Name <span class="required">*</span></label>
+            <input type="text" id="name" name="name" placeholder="First Name & Last name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Votre message..." rows="5" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group captcha-container">
+              <div class="captcha-wrapper">
+                <input type="checkbox" id="captcha" required>
+                <label for="captcha">I'm not a robot</label>
+              </div>
+            </div>
+            <button type="submit" class="submit-btn">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

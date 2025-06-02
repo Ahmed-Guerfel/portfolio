@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Coverage - Ahmed Guerfell</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Styles pour la galerie horizontale */
+        .gallery-container {
+            position: relative;
+            z-index: 3;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .gallery-wrapper {
+            position: relative;
+            padding: 0 60px; /* Espace pour les flèches */
+        }
+
+        .gallery-horizontal {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 2rem 0;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE */
+        }
+
+        .gallery-horizontal::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
+        }
+
+        .gallery-item {
+            flex: 0 0 320px; /* Largeur fixe pour chaque item */
+            position: relative;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            height: 400px; /* Hauteur fixe */
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-info {
+            padding: 1.5rem;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .gallery-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        .gallery-info p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        /* Flèches de navigation */
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(74, 144, 226, 0.9);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-nav:hover {
+            background: #4a90e2;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-nav.prev {
+            left: 10px;
+        }
+
+        .gallery-nav.next {
+            right: 10px;
+        }
+
+        /* Indicateurs de défilement */
+        .scroll-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .scroll-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(74, 144, 226, 0.3);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .scroll-dot.active {
+            background: #4a90e2;
+        }
+
+        /* Modal pour affichage en grand */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+        }
+
+        .modal-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .modal-info h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .modal-info p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Navigation dans le modal */
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .modal-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        /* Compteur d'images */
+        .image-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .gallery-wrapper {
+                padding: 0 20px;
+            }
+
+            .gallery-item {
+                flex: 0 0 280px;
+                height: 350px;
+            }
+
+            .gallery-item img {
+                height: 200px;
+            }
+
+            .gallery-info {
+                height: 150px;
+                padding: 1rem;
+            }
+
+            .gallery-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .gallery-nav.prev {
+                left: 5px;
+            }
+
+            .gallery-nav.next {
+                right: 5px;
+            }
+
+            .modal-nav {
+                display: none;
+            }
+
+            .modal-content {
+                max-width: 95%;
+                max-height: 95%;
+            }
+
+            .modal-info {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-item {
+                flex: 0 0 250px;
+                height: 320px;
+            }
+
+            .gallery-item img {
+                height: 180px;
+            }
+
+            .gallery-info {
+                height: 140px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-circle">
+                    <div class="logo-rays"></div>
+                    <div class="logo-waves"></div>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">AHMED GUERFELL</span>
+                    <span class="logo-sub">CULTURE WORKER</span>
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="social-practice.html" class="nav-link">Social practice</a>
+                <a href="artistic-practice.html" class="nav-link">Artistic practice</a>
+                <a href="culture-management.html" class="nav-link">Culture management</a>
+                <a href="public-speaking.html" class="nav-link">Public speaking</a>
+                <a href="media-coverage.html" class="nav-link active">Media coverage</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+
+            <button class="nav-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Media Coverage Section -->
+    <section id="media-coverage" class="section media-coverage">
+        <div class="section-bg"></div>
+        <div class="section-header">
+            <h1>Media Coverage</h1>
+            <p>Découvrez les articles de presse et la couverture médiatique de mes projets artistiques et culturels.</p>
+            <p>Naviguez horizontalement pour explorer tous les articles ou cliquez pour les agrandir.</p>
+        </div>
+        
+        <div class="gallery-container">
+            <div class="gallery-wrapper">
+                <button class="gallery-nav prev" onclick="scrollGallery(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="gallery-horizontal" id="galleryScroll">
+                    <div class="gallery-item" onclick="openModal(0)">
+                        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=300&fit=crop" alt="Article Le Figaro">
+                        <div class="gallery-info">
+                            <h3>Le Figaro - Festival de Danse</h3>
+                            <p>Couverture du festival international de danse contemporaine organisé à Tunis avec la participation d'artistes de renommée mondiale.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="openModal(1)">
+                        <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=400&h=300&fit=crop" alt="Article Liberation">
+                        <div class="gallery-info">
+                            <h3>Libération - Performance Artistique</h3>
+                            <p>Article détaillé sur la performance "Comment Si Quand?" présentée au Théâtre National de Tunis.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="openModal(2)">
+                        <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=300&fit=crop" alt="Article Le Monde">
+                        <div class="gallery-info">
+                            <h3>Le Monde - Projet Social</h3>
+                            <p>Reportage sur les ateliers de danse pour enfants dans les quartiers défavorisés de la capitale.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="openModal(3)">
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=300&fit=crop" alt="Article El Pais">
+                        <div class="gallery-info">
+                            <h3>El País - Collaboration Internationale</h3>
+                            <p>Interview sur les partenariats culturels euro-méditerranéens et le dialogue interculturel.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="openModal(4)">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop" alt="Article Guardian">
+                        <div class="gallery-info">
+                            <h3>The Guardian - Arts et Culture</h3>
+                            <p>Portrait d'artiste et analyse de l'impact culturel en Afrique du Nord dans la scène contemporaine.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="openModal(5)">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="Article BBC">
+                        <div class="gallery-info">
+                            <h3>BBC - Innovation Artistique</h3>
+                            <p>Documentaire sur l'innovation dans la danse contemporaine arabe et les nouvelles formes d'expression.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="openModal(6)">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop" alt="Article New York Times">
+                        <div class="gallery-info">
+                            <h3>New York Times - Festival International</h3>
+                            <p>Critique élogieuse du spectacle présenté au Lincoln Center de New York lors de la tournée américaine.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="openModal(7)">
+                        <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=400&h=300&fit=crop" alt="Article Arte">
+                        <div class="gallery-info">
+                            <h3>Arte - Documentaire</h3>
+                            <p>Participation au documentaire "Nouvelles Voix de la Méditerranée" diffusé sur Arte en prime time.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="gallery-nav next" onclick="scrollGallery(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="scroll-indicators" id="scrollIndicators">
+                <!-- Les indicateurs seront générés par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal pour affichage en grand -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <button class="modal-nav modal-prev" onclick="changeImage(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="modal-nav modal-next" onclick="changeImage(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="modal-content">
+            <img id="modalImage" class="modal-image" src="/placeholder.svg" alt="">
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription"></p>
+            </div>
+        </div>
+        <div class="image-counter">
+            <span id="currentImageNumber">1</span> / <span id="totalImages">8</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Données des images de la galerie
+        const galleryData = [
+            {
+                src: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop",
+                title: "Le Figaro - Festival de Danse",
+                description: "Couverture complète du festival international de danse contemporaine organisé à Tunis. L'article met en lumière l'innovation artistique et l'impact culturel de l'événement sur la scène méditerranéenne, avec des interviews exclusives des participants."
+            },
+            {
+                src: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&h=600&fit=crop",
+                title: "Libération - Performance Artistique",
+                description: "Article détaillé sur la performance 'Comment Si Quand?' présentée au Théâtre National. Une analyse approfondie de la démarche artistique et de son message social, avec des critiques élogieuses du public et des professionnels."
+            },
+            {
+                src: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=600&fit=crop",
+                title: "Le Monde - Projet Social",
+                description: "Reportage sur les ateliers de danse pour enfants dans les quartiers défavorisés. Un projet qui utilise l'art comme vecteur d'inclusion sociale et d'épanouissement personnel, avec des témoignages touchants des participants et de leurs familles."
+            },
+            {
+                src: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop",
+                title: "El País - Collaboration Internationale",
+                description: "Interview approfondie sur les partenariats culturels euro-méditerranéens et leur rôle dans le dialogue interculturel. Une vision de l'art comme pont entre les civilisations, avec des exemples concrets de collaborations réussies."
+            },
+            {
+                src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop",
+                title: "The Guardian - Arts et Culture",
+                description: "Portrait d'artiste et analyse de l'impact culturel en Afrique du Nord. Une réflexion sur l'évolution de la scène artistique contemporaine dans la région, avec un focus sur les nouveaux talents émergents et leurs influences."
+            },
+            {
+                src: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+                title: "BBC - Innovation Artistique",
+                description: "Documentaire sur l'innovation dans la danse contemporaine arabe. Exploration des nouvelles formes d'expression qui émergent de la fusion entre tradition et modernité, avec des séquences exclusives de répétitions et de créations."
+            },
+            {
+                src: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=600&fit=crop",
+                title: "New York Times - Festival International",
+                description: "Critique élogieuse du spectacle présenté au Lincoln Center de New York. Une reconnaissance internationale de l'excellence artistique et de l'originalité de la démarche, saluée par la critique américaine spécialisée."
+            },
+            {
+                src: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800&h=600&fit=crop",
+                title: "Arte - Documentaire",
+                description: "Participation au documentaire 'Nouvelles Voix de la Méditerranée'. Un témoignage sur l'émergence d'une nouvelle génération d'artistes engagés, diffusé en prime time avec une audience de plus de 2 millions de téléspectateurs."
+            }
+        ];
+
+        let currentImageIndex = 0;
+        let currentScrollPosition = 0;
+
+        // Initialiser les indicateurs de défilement
+        function initScrollIndicators() {
+            const indicatorsContainer = document.getElementById('scrollIndicators');
+            const itemsPerView = Math.floor(window.innerWidth / 340); // Approximation
+            const totalPages = Math.ceil(galleryData.length / itemsPerView);
+            
+            indicatorsContainer.innerHTML = '';
+            for (let i = 0; i < totalPages; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'scroll-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.onclick = () => scrollToPage(i);
+                indicatorsContainer.appendChild(dot);
+            }
+        }
+
+        // Défilement de la galerie
+        function scrollGallery(direction) {
+            const gallery = document.getElementById('galleryScroll');
+            const itemWidth = 320 + 32; // largeur + gap
+            const scrollAmount = itemWidth * 2; // Défiler de 2 items à la fois
+            
+            currentScrollPosition += direction * scrollAmount;
+            
+            // Limites de défilement
+            const maxScroll = gallery.scrollWidth - gallery.clientWidth;
+            if (currentScrollPosition < 0) currentScrollPosition = 0;
+            if (currentScrollPosition > maxScroll) currentScrollPosition = maxScroll;
+            
+            gallery.scrollTo({
+                left: currentScrollPosition,
+                behavior: 'smooth'
+            });
+            
+            updateScrollIndicators();
+        }
+
+        // Défiler vers une page spécifique
+        function scrollToPage(pageIndex) {
+            const gallery = document.getElementById('galleryScroll');
+            const itemWidth = 320 + 32;
+            const itemsPerView = Math.floor(gallery.clientWidth / itemWidth);
+            
+            currentScrollPosition = pageIndex * itemsPerView * itemWidth;
+            gallery.scrollTo({
+                left: currentScrollPosition,
+                behavior: 'smooth'
+            });
+            
+            updateScrollIndicators();
+        }
+
+        // Mettre à jour les indicateurs
+        function updateScrollIndicators() {
+            const dots = document.querySelectorAll('.scroll-dot');
+            const gallery = document.getElementById('galleryScroll');
+            const itemWidth = 320 + 32;
+            const itemsPerView = Math.floor(gallery.clientWidth / itemWidth);
+            const currentPage = Math.floor(currentScrollPosition / (itemsPerView * itemWidth));
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentPage);
+            });
+        }
+
+        // Fonctions du modal (identiques à la version précédente)
+        function openModal(index) {
+            currentImageIndex = index;
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const currentNumber = document.getElementById('currentImageNumber');
+
+            modalImage.src = galleryData[index].src;
+            modalTitle.textContent = galleryData[index].title;
+            modalDescription.textContent = galleryData[index].description;
+            currentNumber.textContent = index + 1;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            
+            if (currentImageIndex >= galleryData.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = galleryData.length - 1;
+            }
+            
+            openModal(currentImageIndex);
+        }
+
+        // Event listeners
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('imageModal');
+            if (modal.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                } else if (e.key === 'ArrowLeft') {
+                    changeImage(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeImage(1);
+                }
+            }
+        });
+
+        // Initialiser au chargement
+        window.addEventListener('load', () => {
+            initScrollIndicators();
+        });
+
+        // Réinitialiser lors du redimensionnement
+        window.addEventListener('resize', () => {
+            initScrollIndicators();
+            currentScrollPosition = 0;
+            document.getElementById('galleryScroll').scrollTo({ left: 0 });
+        });
+    </script>
+</body>
+</html>
