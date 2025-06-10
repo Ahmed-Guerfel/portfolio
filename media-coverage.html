@@ -1,657 +1,1197 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Coverage - Ahmed Guerfell</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        /* Styles pour la galerie horizontale */
-        .gallery-container {
-            position: relative;
-            z-index: 3;
-            max-width: 100%;
-            margin: 0 auto;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Coverage - Ahmed Guerfell</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Styles pour la galerie horizontale */
+    .gallery-container {
+      position: relative;
+      z-index: 3;
+      max-width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+      margin-bottom: 4rem;
+    }
 
-        .gallery-wrapper {
-            position: relative;
-            padding: 0 60px; /* Espace pour les flèches */
-        }
+    .section-divider {
+      margin: 4rem 0;
+      text-align: center;
+    }
 
-        .gallery-horizontal {
-            display: flex;
-            gap: 2rem;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: 2rem 0;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE */
-        }
+    .section-divider h2 {
+      font-size: 2.2rem;
+      color: #333;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      position: relative;
+      display: inline-block;
+    }
 
-        .gallery-horizontal::-webkit-scrollbar {
-            display: none; /* Chrome, Safari */
-        }
+    .section-divider h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #4a90e2;
+      border-radius: 2px;
+    }
 
-        .gallery-item {
-            flex: 0 0 320px; /* Largeur fixe pour chaque item */
-            position: relative;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            height: 400px; /* Hauteur fixe */
-        }
+    .section-divider p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
 
-        .gallery-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
+    .gallery-wrapper {
+      position: relative;
+      padding: 0 60px;
+    }
 
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
+    .gallery-horizontal {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 2rem 0;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
 
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
+    .gallery-horizontal::-webkit-scrollbar {
+      display: none;
+    }
 
-        .gallery-info {
-            padding: 1.5rem;
-            height: 150px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+    .gallery-item {
+      flex: 0 0 320px;
+      position: relative;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      height: 400px;
+    }
 
-        .gallery-info h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #333;
-            line-height: 1.3;
-        }
+    .gallery-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
 
-        .gallery-info p {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.4;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
 
-        /* Flèches de navigation */
-        .gallery-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(74, 144, 226, 0.9);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
 
-        .gallery-nav:hover {
-            background: #4a90e2;
-            transform: translateY(-50%) scale(1.1);
-        }
+    /* Style spécial pour les miniatures Facebook */
+    .facebook-thumbnail {
+      background: linear-gradient(135deg, #1877f2 0%, #42a5f5 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      height: 250px;
+    }
 
-        .gallery-nav.prev {
-            left: 10px;
-        }
+    .facebook-thumbnail::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" opacity="0.1"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>') center/60px no-repeat;
+    }
 
-        .gallery-nav.next {
-            right: 10px;
-        }
+    .facebook-thumbnail .radio-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      z-index: 1;
+      position: relative;
+    }
 
-        /* Indicateurs de défilement */
-        .scroll-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 2rem;
-        }
+    .facebook-thumbnail .radio-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      z-index: 1;
+      position: relative;
+    }
 
-        .scroll-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(74, 144, 226, 0.3);
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
+    /* Style spécial pour les articles de journaux */
+    .newspaper-item {
+      border-left: 4px solid #2c3e50;
+    }
 
-        .scroll-dot.active {
-            background: #4a90e2;
-        }
+    .newspaper-item .gallery-info {
+      background: linear-gradient(to bottom, transparent, rgba(44, 62, 80, 0.05));
+    }
 
-        /* Modal pour affichage en grand */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s ease;
-        }
+    /* Style spécial pour les apparitions TV/Radio */
+    .media-appearance-item {
+      border-left: 4px solid #e74c3c;
+    }
 
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .media-appearance-item .gallery-info {
+      background: linear-gradient(to bottom, transparent, rgba(231, 76, 60, 0.05));
+    }
 
-        .modal-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            margin: auto;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
+    /* Overlay pour les vidéos */
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
 
-        .modal-image {
-            width: 100%;
-            height: auto;
-            max-height: 70vh;
-            object-fit: contain;
-        }
+    .gallery-item[data-type="video"] .video-overlay {
+      opacity: 1;
+    }
 
-        .modal-info {
-            padding: 2rem;
-            text-align: center;
-        }
+    .play-button {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #333;
+      transition: transform 0.3s ease;
+    }
 
-        .modal-info h3 {
-            font-size: 1.5rem;
-            color: #333;
-            margin-bottom: 1rem;
-        }
+    .gallery-item:hover .play-button {
+      transform: scale(1.1);
+      background: white;
+    }
 
-        .modal-info p {
-            color: #666;
-            line-height: 1.6;
-        }
+    /* Badge vidéo */
+    .video-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 59, 48, 0.9);
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
 
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
-            cursor: pointer;
-            background: rgba(0, 0, 0, 0.5);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
-        }
+    .video-badge.facebook {
+      background: rgba(24, 119, 242, 0.9);
+    }
 
-        .close-modal:hover {
-            background: rgba(0, 0, 0, 0.8);
-        }
+    .video-badge.youtube {
+      background: rgba(255, 0, 0, 0.9);
+    }
 
-        /* Navigation dans le modal */
-        .modal-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            font-size: 1.5rem;
-            padding: 15px 20px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
+    /* Badge pour les articles */
+    .article-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(44, 62, 80, 0.9);
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
 
-        .modal-nav:hover {
-            background: rgba(0, 0, 0, 0.8);
-        }
+    .gallery-info {
+      padding: 1.5rem;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-        .modal-prev {
-            left: 20px;
-        }
+    .gallery-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #333;
+      line-height: 1.3;
+    }
 
-        .modal-next {
-            right: 20px;
-        }
+    .gallery-info p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.4;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
 
-        /* Compteur d'images */
-        .image-counter {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
+    /* Flèches de navigation */
+    .gallery-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(74, 144, 226, 0.9);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .gallery-wrapper {
-                padding: 0 20px;
-            }
+    .gallery-nav:hover {
+      background: #4a90e2;
+      transform: translateY(-50%) scale(1.1);
+    }
 
-            .gallery-item {
-                flex: 0 0 280px;
-                height: 350px;
-            }
+    .gallery-nav.prev {
+      left: 10px;
+    }
 
-            .gallery-item img {
-                height: 200px;
-            }
+    .gallery-nav.next {
+      right: 10px;
+    }
 
-            .gallery-info {
-                height: 150px;
-                padding: 1rem;
-            }
+    /* Indicateurs de défilement */
+    .scroll-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
 
-            .gallery-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
+    .scroll-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(74, 144, 226, 0.3);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
 
-            .gallery-nav.prev {
-                left: 5px;
-            }
+    .scroll-dot.active {
+      background: #4a90e2;
+    }
 
-            .gallery-nav.next {
-                right: 5px;
-            }
+    /* Modal pour affichage en grand */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      animation: fadeIn 0.3s ease;
+    }
 
-            .modal-nav {
-                display: none;
-            }
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-            .modal-content {
-                max-width: 95%;
-                max-height: 95%;
-            }
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
 
-            .modal-info {
-                padding: 1.5rem;
-            }
-        }
+    /* Styles pour les médias dans le modal */
+    .modal-media {
+      width: 100%;
+      max-height: 70vh;
+    }
 
-        @media (max-width: 480px) {
-            .gallery-item {
-                flex: 0 0 250px;
-                height: 320px;
-            }
+    .modal-image {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      display: block;
+    }
 
-            .gallery-item img {
-                height: 180px;
-            }
+    .modal-video {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
 
-            .gallery-info {
-                height: 140px;
-            }
-        }
+    .modal-info {
+      padding: 2rem;
+      text-align: center;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
+    /* Métadonnées du modal */
+    .modal-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .modal-badge {
+      background: #f0f0f0;
+      padding: 0.4rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #666;
+    }
+
+    .modal-badge.video {
+      background: #ff3b30;
+      color: white;
+    }
+
+    .modal-badge.article {
+      background: #2c3e50;
+      color: white;
+    }
+
+    /* Lien YouTube */
+    .youtube-link {
+      background: #ff0000;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 15px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: background 0.3s ease;
+    }
+
+    .youtube-link:hover {
+      background: #cc0000;
+    }
+
+    /* Lien Facebook */
+    .facebook-link {
+      background: #1877f2;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 15px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: background 0.3s ease;
+    }
+
+    .facebook-link:hover {
+      background: #0d65d9;
+    }
+
+    .modal-info h3 {
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .modal-info p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.5);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+
+    .close-modal:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Navigation dans le modal */
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      font-size: 1.5rem;
+      padding: 15px 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .modal-nav:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-prev {
+      left: 20px;
+    }
+
+    .modal-next {
+      right: 20px;
+    }
+
+    /* Compteur d'images */
+    .image-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .gallery-wrapper {
+        padding: 0 20px;
+      }
+
+      .gallery-item {
+        flex: 0 0 280px;
+        height: 350px;
+      }
+
+      .gallery-item img {
+        height: 200px;
+      }
+
+      .facebook-thumbnail {
+        height: 200px;
+      }
+
+      .gallery-info {
+        height: 150px;
+        padding: 1rem;
+      }
+
+      .gallery-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+
+      .gallery-nav.prev {
+        left: 5px;
+      }
+
+      .gallery-nav.next {
+        right: 5px;
+      }
+
+      .modal-nav {
+        display: none;
+      }
+
+      .modal-content {
+        max-width: 95%;
+        max-height: 95%;
+      }
+
+      .modal-video {
+        height: 250px;
+      }
+
+      .modal-info {
+        padding: 1.5rem;
+      }
+
+      .modal-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .section-divider h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-item {
+        flex: 0 0 250px;
+        height: 320px;
+      }
+
+      .gallery-item img {
+        height: 180px;
+      }
+
+      .facebook-thumbnail {
+        height: 180px;
+      }
+
+      .gallery-info {
+        height: 140px;
+      }
+
+      .modal-video {
+        height: 200px;
+      }
+
+      .section-divider h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="logo-circle">
-                    <div class="logo-rays"></div>
-                    <div class="logo-waves"></div>
-                </div>
-                <div class="logo-text">
-                    <span class="logo-main">AHMED GUERFELL</span>
-                    <span class="logo-sub">CULTURE WORKER</span>
-                </div>
-            </div>
-            
-            <div class="nav-menu">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="social-practice.html" class="nav-link">Social practice</a>
-                <a href="artistic-practice.html" class="nav-link">Artistic practice</a>
-                <a href="culture-management.html" class="nav-link">Culture management</a>
-                <a href="public-speaking.html" class="nav-link">Public speaking</a>
-                <a href="media-coverage.html" class="nav-link active">Media coverage</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </div>
-
-            <button class="nav-toggle" id="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </button>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-circle">
+          <div class="logo-rays"></div>
+          <div class="logo-waves"></div>
         </div>
-    </nav>
-
-    <!-- Media Coverage Section -->
-    <section id="media-coverage" class="section media-coverage">
-        <div class="section-bg"></div>
-        <div class="section-header">
-            <h1>Media Coverage</h1>
-            <p>Découvrez les articles de presse et la couverture médiatique de mes projets artistiques et culturels.</p>
-            <p>Naviguez horizontalement pour explorer tous les articles ou cliquez pour les agrandir.</p>
+        <div class="logo-text">
+          <span class="logo-main">AHMED GUERFELL</span>
+          <span class="logo-sub">CULTURE WORKER</span>
         </div>
-        
-        <div class="gallery-container">
-            <div class="gallery-wrapper">
-                <button class="gallery-nav prev" onclick="scrollGallery(-1)">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                
-                <div class="gallery-horizontal" id="galleryScroll">
-                    <div class="gallery-item" onclick="openModal(0)">
-                        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=300&fit=crop" alt="Article Le Figaro">
-                        <div class="gallery-info">
-                            <h3>Le Figaro - Festival de Danse</h3>
-                            <p>Couverture du festival international de danse contemporaine organisé à Tunis avec la participation d'artistes de renommée mondiale.</p>
-                        </div>
-                    </div>
+      </div>
 
-                    <div class="gallery-item" onclick="openModal(1)">
-                        <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=400&h=300&fit=crop" alt="Article Liberation">
-                        <div class="gallery-info">
-                            <h3>Libération - Performance Artistique</h3>
-                            <p>Article détaillé sur la performance "Comment Si Quand?" présentée au Théâtre National de Tunis.</p>
-                        </div>
-                    </div>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="social-practice.html" class="nav-link">Social practice</a>
+        <a href="artistic-practice.html" class="nav-link">Artistic practice</a>
+        <a href="culture-management.html" class="nav-link">Culture management</a>
+        <a href="public-speaking.html" class="nav-link">Public speaking</a>
+        <a href="media-coverage.html" class="nav-link active">Media coverage</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
 
-                    <div class="gallery-item" onclick="openModal(2)">
-                        <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=300&fit=crop" alt="Article Le Monde">
-                        <div class="gallery-info">
-                            <h3>Le Monde - Projet Social</h3>
-                            <p>Reportage sur les ateliers de danse pour enfants dans les quartiers défavorisés de la capitale.</p>
-                        </div>
-                    </div>
+      <button class="nav-toggle" id="mobile-menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
 
-                    <div class="gallery-item" onclick="openModal(3)">
-                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=300&fit=crop" alt="Article El Pais">
-                        <div class="gallery-info">
-                            <h3>El País - Collaboration Internationale</h3>
-                            <p>Interview sur les partenariats culturels euro-méditerranéens et le dialogue interculturel.</p>
-                        </div>
-                    </div>
+  <!-- Media Coverage Section -->
+  <section id="media-coverage" class="section media-coverage">
+    <div class="section-bg"></div>
+    <div class="section-header">
 
-                    <div class="gallery-item" onclick="openModal(4)">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop" alt="Article Guardian">
-                        <div class="gallery-info">
-                            <h3>The Guardian - Arts et Culture</h3>
-                            <p>Portrait d'artiste et analyse de l'impact culturel en Afrique du Nord dans la scène contemporaine.</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item" onclick="openModal(5)">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="Article BBC">
-                        <div class="gallery-info">
-                            <h3>BBC - Innovation Artistique</h3>
-                            <p>Documentaire sur l'innovation dans la danse contemporaine arabe et les nouvelles formes d'expression.</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item" onclick="openModal(6)">
-                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop" alt="Article New York Times">
-                        <div class="gallery-info">
-                            <h3>New York Times - Festival International</h3>
-                            <p>Critique élogieuse du spectacle présenté au Lincoln Center de New York lors de la tournée américaine.</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item" onclick="openModal(7)">
-                        <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=400&h=300&fit=crop" alt="Article Arte">
-                        <div class="gallery-info">
-                            <h3>Arte - Documentaire</h3>
-                            <p>Participation au documentaire "Nouvelles Voix de la Méditerranée" diffusé sur Arte en prime time.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="gallery-nav next" onclick="scrollGallery(1)">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-
-            <div class="scroll-indicators" id="scrollIndicators">
-                <!-- Les indicateurs seront générés par JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Modal pour affichage en grand -->
-    <div id="imageModal" class="modal">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <button class="modal-nav modal-prev" onclick="changeImage(-1)">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="modal-nav modal-next" onclick="changeImage(1)">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-        <div class="modal-content">
-            <img id="modalImage" class="modal-image" src="/placeholder.svg" alt="">
-            <div class="modal-info">
-                <h3 id="modalTitle"></h3>
-                <p id="modalDescription"></p>
-            </div>
-        </div>
-        <div class="image-counter">
-            <span id="currentImageNumber">1</span> / <span id="totalImages">8</span>
-        </div>
     </div>
 
-    <script src="script.js"></script>
-    <script>
-        // Données des images de la galerie
-        const galleryData = [
-            {
-                src: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop",
-                title: "Le Figaro - Festival de Danse",
-                description: "Couverture complète du festival international de danse contemporaine organisé à Tunis. L'article met en lumière l'innovation artistique et l'impact culturel de l'événement sur la scène méditerranéenne, avec des interviews exclusives des participants."
-            },
-            {
-                src: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&h=600&fit=crop",
-                title: "Libération - Performance Artistique",
-                description: "Article détaillé sur la performance 'Comment Si Quand?' présentée au Théâtre National. Une analyse approfondie de la démarche artistique et de son message social, avec des critiques élogieuses du public et des professionnels."
-            },
-            {
-                src: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=600&fit=crop",
-                title: "Le Monde - Projet Social",
-                description: "Reportage sur les ateliers de danse pour enfants dans les quartiers défavorisés. Un projet qui utilise l'art comme vecteur d'inclusion sociale et d'épanouissement personnel, avec des témoignages touchants des participants et de leurs familles."
-            },
-            {
-                src: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop",
-                title: "El País - Collaboration Internationale",
-                description: "Interview approfondie sur les partenariats culturels euro-méditerranéens et leur rôle dans le dialogue interculturel. Une vision de l'art comme pont entre les civilisations, avec des exemples concrets de collaborations réussies."
-            },
-            {
-                src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop",
-                title: "The Guardian - Arts et Culture",
-                description: "Portrait d'artiste et analyse de l'impact culturel en Afrique du Nord. Une réflexion sur l'évolution de la scène artistique contemporaine dans la région, avec un focus sur les nouveaux talents émergents et leurs influences."
-            },
-            {
-                src: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
-                title: "BBC - Innovation Artistique",
-                description: "Documentaire sur l'innovation dans la danse contemporaine arabe. Exploration des nouvelles formes d'expression qui émergent de la fusion entre tradition et modernité, avec des séquences exclusives de répétitions et de créations."
-            },
-            {
-                src: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=600&fit=crop",
-                title: "New York Times - Festival International",
-                description: "Critique élogieuse du spectacle présenté au Lincoln Center de New York. Une reconnaissance internationale de l'excellence artistique et de l'originalité de la démarche, saluée par la critique américaine spécialisée."
-            },
-            {
-                src: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800&h=600&fit=crop",
-                title: "Arte - Documentaire",
-                description: "Participation au documentaire 'Nouvelles Voix de la Méditerranée'. Un témoignage sur l'émergence d'une nouvelle génération d'artistes engagés, diffusé en prime time avec une audience de plus de 2 millions de téléspectateurs."
-            }
-        ];
+    <!-- Section 1: Newspaper Articles -->
+    <div class="section-divider">
+      <h2><i class="fas fa-newspaper"></i> Newspaper Articles</h2>
+      <p>Press articles and publications in national and international newspapers.</p>
+    </div>
 
-        let currentImageIndex = 0;
-        let currentScrollPosition = 0;
+    <div class="gallery-container">
+      <div class="gallery-wrapper">
+        <button class="gallery-nav prev" onclick="scrollGallery('newspaper', -1)">
+          <i class="fas fa-chevron-left"></i>
+        </button>
 
-        // Initialiser les indicateurs de défilement
-        function initScrollIndicators() {
-            const indicatorsContainer = document.getElementById('scrollIndicators');
-            const itemsPerView = Math.floor(window.innerWidth / 340); // Approximation
-            const totalPages = Math.ceil(galleryData.length / itemsPerView);
-            
-            indicatorsContainer.innerHTML = '';
-            for (let i = 0; i < totalPages; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'scroll-dot';
-                if (i === 0) dot.classList.add('active');
-                dot.onclick = () => scrollToPage(i);
-                indicatorsContainer.appendChild(dot);
-            }
+        <div class="gallery-horizontal" id="newspaperGallery">
+          <div class="gallery-item newspaper-item" onclick="openModal('newspaper', 0)">
+            <img src="https://res.cloudinary.com/dxftqgx5t/image/upload/v1749120866/image_7_vwdbjp.png"
+              alt="Article Le Figaro">
+            <div class="article-badge">
+              <i class="fas fa-newspaper"></i> Article
+            </div>
+            <div class="gallery-info">
+              <h3>Le Figaro - Dance Festival</h3>
+              <p>Coverage of the international contemporary dance festival held in Tunis, featuring world-renowned
+                artists.</p>
+
+            </div>
+          </div>
+
+          <div class="gallery-item newspaper-item" onclick="openModal('newspaper', 1)">
+            <img src="https://res.cloudinary.com/dxftqgx5t/image/upload/v1749463325/article4_edx9ka.png"
+              alt="Article de Libération">
+            <div class="article-badge">
+              <i class="fas fa-newspaper"></i> Article
+            </div>
+            <div class="gallery-info">
+              <h3>جمعية الراقصون المواطنون الجنوب</h3>
+              <p>Detailed article on the performance 'Comment Si Quand?' presented at the National Theater of Tunis.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item newspaper-item" onclick="openModal('newspaper', 2)">
+            <img
+              src="https://res.cloudinary.com/dxftqgx5t/image/upload/v1749463556/Capture_d_%C3%A9cran_2025-06-09_110305_lfryl0.png"
+              alt="Article Le Monde">
+            <div class="article-badge">
+              <i class="fas fa-newspaper"></i> Article
+            </div>
+            <div class="gallery-info">
+              <h3>The World - Social Project</h3>
+<p>Report on dance workshops for children in underprivileged neighborhoods of the capital.</p>
+
+
+            </div>
+          </div>
+
+          <div class="gallery-item newspaper-item" onclick="openModal('newspaper', 3)">
+            <img src="https://res.cloudinary.com/dxftqgx5t/image/upload/v1749463900/541545445_nyp35g.png"
+              alt="Article El Pais">
+            <div class="article-badge">
+              <i class="fas fa-newspaper"></i> Article
+            </div>
+            <div class="gallery-info">
+              <h3>El País - International Collaboration</h3>
+<p>Interview on Euro-Mediterranean cultural partnerships and intercultural dialogue.</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="gallery-nav next" onclick="scrollGallery('newspaper', 1)">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <div class="scroll-indicators" id="newspaperIndicators">
+        <!-- Les indicateurs seront générés par JavaScript -->
+      </div>
+    </div>
+
+    <!-- Section 2: TV and Radio Appearances -->
+    <div class="section-divider">
+      <h2><i class="fas fa-broadcast-tower"></i> TV and Radio Appearances</h2>
+<p>Interviews, documentaries, and appearances in audiovisual media</p>
+    </div>
+
+    <div class="gallery-container">
+      <div class="gallery-wrapper">
+        <button class="gallery-nav prev" onclick="scrollGallery('media', -1)">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="gallery-horizontal" id="mediaGallery">
+          <!-- Vidéos Facebook avec miniatures personnalisées -->
+          <div class="gallery-item media-appearance-item" data-type="video" onclick="openModal('media', 0)">
+            <div class="facebook-thumbnail">
+              <div class="radio-name">Radio Elyssa FM</div>
+              <div class="radio-subtitle">Gabes</div>
+            </div>
+            <div class="video-overlay">
+              <div class="play-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-badge facebook">
+              <i class="fab fa-facebook"></i> Radio
+            </div>
+            <div class="gallery-info">
+              <h3>Radio Elyssa FM Gabes</h3>
+            <p>Interview on cultural and artistic projects in the Gabes region.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item media-appearance-item" data-type="video" onclick="openModal('media', 1)">
+            <div class="facebook-thumbnail">
+              <div class="radio-name">Radio Palma</div>
+              <div class="radio-subtitle">Tunisie</div>
+            </div>
+            <div class="video-overlay">
+              <div class="play-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-badge facebook">
+              <i class="fab fa-facebook"></i> Radio
+            </div>
+            <div class="gallery-info">
+              <h3>Radio Palma Tunisie</h3>
+              <p>Participation in the program "Starting Point" hosted by Sabrine Hmimida.</p>
+            </div>
+          </div>
+
+          <!-- Vidéos YouTube -->
+          <div class="gallery-item media-appearance-item" data-type="video" onclick="openModal('media', 2)">
+            <img src="https://img.youtube.com/vi/B-8JmQP437g/maxresdefault.jpg" alt="Interview YouTube">
+            <div class="video-overlay">
+              <div class="play-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-badge youtube">
+              <i class="fab fa-youtube"></i> Interview
+            </div>
+            <div class="gallery-info">
+            <h3>Interview on YouTube</h3>
+<p>Detailed conversation about contemporary art practices.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item media-appearance-item" data-type="video" onclick="openModal('media', 3)">
+            <img src="https://img.youtube.com/vi/_v_XhcQQ6Ds/maxresdefault.jpg" alt="Présentation de Projet">
+            <div class="video-overlay">
+              <div class="play-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-badge youtube">
+              <i class="fab fa-youtube"></i>  Presentation
+            </div>
+            <div class="gallery-info">
+            <h3>Project Overview</h3>
+<p>In-depth presentation of an innovative artistic initiative.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item media-appearance-item" data-type="video" onclick="openModal('media', 4)">
+            <img src="https://img.youtube.com/vi/TbwAG-tcRtU/maxresdefault.jpg" alt="Dancers Citizens South Tunisia">
+            <div class="video-overlay">
+              <div class="play-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-badge youtube">
+              <i class="fas fa-video"></i> Documentary
+            </div>
+            <div class="gallery-info">
+              <h3>Dancers Citizens South (Tunisia)</h3>
+<p>Dancers Citizens South – Documentary on the artistic and cultural project of citizen dancers from southern Tunisia.</p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <button class="gallery-nav next" onclick="scrollGallery('media', 1)">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <div class="scroll-indicators" id="mediaIndicators">
+        <!-- Les indicateurs seront générés par JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal pour affichage en grand -->
+  <div id="imageModal" class="modal">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <button class="modal-nav modal-prev" onclick="changeImage(-1)">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="modal-nav modal-next" onclick="changeImage(1)">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    <div class="modal-content">
+      <div class="modal-media" id="modalMedia">
+        <img id="modalImage" class="modal-image" src="/placeholder.svg" alt="">
+      </div>
+      <div class="modal-info">
+        <div class="modal-meta" id="modalMeta">
+          <!-- Les badges seront ajoutés par JavaScript -->
+        </div>
+        <h3 id="modalTitle"></h3>
+        <p id="modalDescription"></p>
+      </div>
+    </div>
+    <div class="image-counter">
+      <span id="currentImageNumber">1</span> / <span id="totalImages">9</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Données séparées pour les deux sections
+    const newspaperData = [
+      {
+        type: "image",
+        src: "https://res.cloudinary.com/dxftqgx5t/image/upload/v1749120866/image_7_vwdbjp.png",
+        title: "Le Figaro - Festival de Danse",
+description: "Complete coverage of the International Contemporary Dance Festival held in Tunis. The article highlights the artistic innovation and cultural impact of the event on the Mediterranean scene, featuring exclusive interviews with participants.",        source: "Le Figaro",
+        date: "15 Mars 2024",
+        category: "Festival"
+      },
+      {
+        type: "image",
+        src: "https://res.cloudinary.com/dxftqgx5t/image/upload/v1749463325/article4_edx9ka.png",
+        title: "جمعية الراقصون المواطنون الجنوب",
+        description: "Detailed article on the performance 'Comment Si Quand?' presented at the National Theater. An in-depth analysis of the artistic approach and its social message, featuring praise from both the audience and professionals.",        source: "Libération",
+        date: "10 Janvier 2024",
+        category: "Performance"
+      },
+      {
+        type: "image",
+        src: "https://res.cloudinary.com/dxftqgx5t/image/upload/v1749463556/Capture_d_%C3%A9cran_2025-06-09_110305_lfryl0.png",
+        title: "Le Monde - Projet Social",
+        description: "Reportage sur les ateliers de danse pour enfants dans les quartiers défavorisés. Un projet qui utilise l'art comme vecteur d'inclusion sociale et d'épanouissement personnel, avec des témoignages touchants des participants et de leurs familles.",
+        source: "Le Monde",
+        date: "18 Novembre 2023",
+        category: "Social"
+      },
+      {
+        type: "image",
+        src: "https://res.cloudinary.com/dxftqgx5t/image/upload/v1749463900/541545445_nyp35g.png",
+        title: "El País - Collaboration Internationale",
+        description: "Interview approfondie sur les partenariats culturels euro-méditerranéens et leur rôle dans le dialogue interculturel. Une vision de l'art comme pont entre les civilisations, avec des exemples concrets de collaborations réussies.",
+        source: "El País",
+        date: "25 Octobre 2023",
+        category: "Interview"
+      }
+    ];
+
+    const mediaData = [
+      {
+        type: "video",
+        src: "facebook-thumbnail",
+        videoUrl: "https://www.facebook.com/radioelyssafmgabes/videos/480222792885368/",
+        title: "Radio Elyssa FM Gabes",
+        description: "Interview exclusive sur Radio Elyssa FM Gabes concernant les projets culturels et artistiques dans la région. Discussion sur l'impact de l'art sur le développement local et les initiatives communautaires.",
+        source: "Radio Elyssa FM",
+        date: "2024",
+        category: "Interview Radio",
+        platform: "facebook"
+      },
+      {
+        type: "video",
+        src: "facebook-thumbnail",
+        videoUrl: "https://www.facebook.com/RadioPalmaTunisie/videos/%D8%AA%D8%B3%D8%AA%D9%85%D8%B9%D9%88%D9%86-%D8%A7%D9%84%D8%A7%D9%86-%D9%84%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC-%D9%86%D9%82%D8%B7%D8%A9-%D8%A7%D9%86%D8%B7%D9%84%D8%A7%D9%82-%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF-%D9%88-%D8%AA%D9%82%D8%AF%D9%8A%D9%85-%D8%B5%D8%A7%D8%A8%D8%B1%D9%8A%D9%86-%D8%AD%D9%85%D9%8A%D9%85%D9%8A%D8%AF%D8%A9-%D8%B6%D9%8A%D9%88%D9%81-%D8%A7%D9%84%D8%AD%D9%84%D9%82%D8%A9-%D8%A7%D8%AD%D9%85%D8%AF-%D9%82/5010075145699295/",
+        title: "Radio Palma Tunisie",
+        description: "Participation au programme 'نقطة انطلاق' présenté par Sabrine Hmimida sur Radio Palma Tunisie. Discussion approfondie sur les projets culturels actuels et futurs.",
+        source: "Radio Palma",
+        date: "2024",
+        category: "Talk-show",
+        platform: "facebook"
+      },
+      {
+        type: "video",
+        src: "https://img.youtube.com/vi/B-8JmQP437g/maxresdefault.jpg",
+        videoId: "B-8JmQP437g",
+        title: "Interview sur YouTube",
+        description: "Discussion approfondie sur les pratiques artistiques contemporaines et leur impact sur la société tunisienne. Analyse des tendances actuelles et des défis à relever dans le domaine culturel.",
+        source: "YouTube",
+        date: "2023",
+        category: "Interview",
+        platform: "youtube"
+      },
+      {
+        type: "video",
+        src: "https://img.youtube.com/vi/_v_XhcQQ6Ds/maxresdefault.jpg",
+        videoId: "_v_XhcQQ6Ds",
+        title: "Présentation de Projet",
+        description: "Présentation détaillée d'un projet artistique innovant qui combine danse contemporaine et engagement social. Exploration des méthodes de travail et des objectifs du projet.",
+        source: "YouTube",
+        date: "2023",
+        category: "Présentation",
+        platform: "youtube"
+      },
+      {
+        type: "video",
+        src: "https://img.youtube.com/vi/TbwAG-tcRtU/maxresdefault.jpg",
+        videoId: "TbwAG-tcRtU",
+        title: "Dancers Citizens South (Tunisia)",
+        description: "الراقصون المواطنون الجنوب - Documentaire sur le projet artistique et culturel des danseurs citoyens du sud de la Tunisie. Une exploration de l'art comme moyen d'expression sociale et culturelle dans la région.",
+        source: "Culture Resource",
+        date: "2023",
+        category: "Documentaire",
+        platform: "youtube"
+      }
+    ];
+
+    let currentSection = '';
+    let currentImageIndex = 0;
+    let currentScrollPositions = {
+      newspaper: 0,
+      media: 0
+    };
+
+    // Initialiser les indicateurs de défilement
+    function initScrollIndicators(section) {
+      const indicatorsContainer = document.getElementById(section + 'Indicators');
+      const data = section === 'newspaper' ? newspaperData : mediaData;
+      const itemsPerView = Math.floor(window.innerWidth / 340);
+      const totalPages = Math.ceil(data.length / itemsPerView);
+
+      indicatorsContainer.innerHTML = '';
+      for (let i = 0; i < totalPages; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'scroll-dot';
+        if (i === 0) dot.classList.add('active');
+        dot.onclick = () => scrollToPage(section, i);
+        indicatorsContainer.appendChild(dot);
+      }
+    }
+
+    // Défilement de la galerie
+    function scrollGallery(section, direction) {
+      const gallery = document.getElementById(section + 'Gallery');
+      const itemWidth = 320 + 32;
+      const scrollAmount = itemWidth * 2;
+
+      currentScrollPositions[section] += direction * scrollAmount;
+
+      const maxScroll = gallery.scrollWidth - gallery.clientWidth;
+      if (currentScrollPositions[section] < 0) currentScrollPositions[section] = 0;
+      if (currentScrollPositions[section] > maxScroll) currentScrollPositions[section] = maxScroll;
+
+      gallery.scrollTo({
+        left: currentScrollPositions[section],
+        behavior: 'smooth'
+      });
+
+      updateScrollIndicators(section);
+    }
+
+    // Défiler vers une page spécifique
+    function scrollToPage(section, pageIndex) {
+      const gallery = document.getElementById(section + 'Gallery');
+      const itemWidth = 320 + 32;
+      const itemsPerView = Math.floor(gallery.clientWidth / itemWidth);
+
+      currentScrollPositions[section] = pageIndex * itemsPerView * itemWidth;
+      gallery.scrollTo({
+        left: currentScrollPositions[section],
+        behavior: 'smooth'
+      });
+
+      updateScrollIndicators(section);
+    }
+
+    // Mettre à jour les indicateurs
+    function updateScrollIndicators(section) {
+      const dots = document.querySelectorAll('#' + section + 'Indicators .scroll-dot');
+      const gallery = document.getElementById(section + 'Gallery');
+      const itemWidth = 320 + 32;
+      const itemsPerView = Math.floor(gallery.clientWidth / itemWidth);
+      const currentPage = Math.floor(currentScrollPositions[section] / (itemsPerView * itemWidth));
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentPage);
+      });
+    }
+
+    // Ouvrir le modal
+    function openModal(section, index) {
+      currentSection = section;
+      currentImageIndex = index;
+      const modal = document.getElementById('imageModal');
+      const modalMedia = document.getElementById('modalMedia');
+      const modalMeta = document.getElementById('modalMeta');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDescription = document.getElementById('modalDescription');
+      const currentNumber = document.getElementById('currentImageNumber');
+      const totalNumber = document.getElementById('totalImages');
+
+      const data = section === 'newspaper' ? newspaperData : mediaData;
+      const item = data[index];
+
+      // Vider le contenu précédent
+      modalMedia.innerHTML = '';
+      modalMeta.innerHTML = '';
+
+      // Ajouter le média (image ou vidéo)
+      if (item.type === 'video') {
+        if (item.platform === 'youtube' && item.videoId) {
+          const iframe = document.createElement('iframe');
+          iframe.className = 'modal-video';
+          iframe.src = `https://www.youtube.com/embed/${item.videoId}?autoplay=1`;
+          iframe.title = item.title;
+          iframe.frameBorder = '0';
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+          iframe.allowFullscreen = true;
+          modalMedia.appendChild(iframe);
+        } else if (item.platform === 'facebook' && item.videoUrl) {
+          // Pour Facebook, on affiche la miniature personnalisée
+          const thumbnailDiv = document.createElement('div');
+          thumbnailDiv.className = 'facebook-thumbnail';
+          thumbnailDiv.style.height = '400px';
+          thumbnailDiv.innerHTML = `
+                        <div class="radio-name">${item.source}</div>
+                        <div class="radio-subtitle">Cliquez sur le lien ci-dessous pour voir la vidéo</div>
+                    `;
+          modalMedia.appendChild(thumbnailDiv);
         }
+      } else {
+        const img = document.createElement('img');
+        img.className = 'modal-image';
+        img.src = item.src;
+        img.alt = item.title;
+        modalMedia.appendChild(img);
+      }
 
-        // Défilement de la galerie
-        function scrollGallery(direction) {
-            const gallery = document.getElementById('galleryScroll');
-            const itemWidth = 320 + 32; // largeur + gap
-            const scrollAmount = itemWidth * 2; // Défiler de 2 items à la fois
-            
-            currentScrollPosition += direction * scrollAmount;
-            
-            // Limites de défilement
-            const maxScroll = gallery.scrollWidth - gallery.clientWidth;
-            if (currentScrollPosition < 0) currentScrollPosition = 0;
-            if (currentScrollPosition > maxScroll) currentScrollPosition = maxScroll;
-            
-            gallery.scrollTo({
-                left: currentScrollPosition,
-                behavior: 'smooth'
-            });
-            
-            updateScrollIndicators();
+      // Ajouter les badges
+      const sourceBadge = document.createElement('span');
+      sourceBadge.className = 'modal-badge';
+      sourceBadge.textContent = item.source;
+      modalMeta.appendChild(sourceBadge);
+
+      const categoryBadge = document.createElement('span');
+      categoryBadge.className = `modal-badge ${item.type}`;
+      categoryBadge.textContent = item.category;
+      modalMeta.appendChild(categoryBadge);
+
+      const dateBadge = document.createElement('span');
+      dateBadge.className = 'modal-badge';
+      dateBadge.textContent = item.date;
+      modalMeta.appendChild(dateBadge);
+
+      // Ajouter le lien externe si c'est une vidéo
+      if (item.type === 'video') {
+        if (item.platform === 'youtube' && item.videoId) {
+          const youtubeLink = document.createElement('a');
+          youtubeLink.className = 'youtube-link';
+          youtubeLink.href = `https://www.youtube.com/watch?v=${item.videoId}`;
+          youtubeLink.target = '_blank';
+          youtubeLink.innerHTML = '<i class="fab fa-youtube"></i> Voir sur YouTube';
+          modalMeta.appendChild(youtubeLink);
+        } else if (item.platform === 'facebook' && item.videoUrl) {
+          const facebookLink = document.createElement('a');
+          facebookLink.className = 'facebook-link';
+          facebookLink.href = item.videoUrl;
+          facebookLink.target = '_blank';
+          facebookLink.innerHTML = '<i class="fab fa-facebook"></i> Voir sur Facebook';
+          modalMeta.appendChild(facebookLink);
         }
+      }
 
-        // Défiler vers une page spécifique
-        function scrollToPage(pageIndex) {
-            const gallery = document.getElementById('galleryScroll');
-            const itemWidth = 320 + 32;
-            const itemsPerView = Math.floor(gallery.clientWidth / itemWidth);
-            
-            currentScrollPosition = pageIndex * itemsPerView * itemWidth;
-            gallery.scrollTo({
-                left: currentScrollPosition,
-                behavior: 'smooth'
-            });
-            
-            updateScrollIndicators();
+      modalTitle.textContent = item.title;
+      modalDescription.textContent = item.description;
+      currentNumber.textContent = index + 1;
+      totalNumber.textContent = data.length;
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Fermer le modal
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+
+      // Arrêter la vidéo si c'est une vidéo
+      const modalMedia = document.getElementById('modalMedia');
+      modalMedia.innerHTML = '';
+    }
+
+    // Changer de média dans le modal
+    function changeImage(direction) {
+      const data = currentSection === 'newspaper' ? newspaperData : mediaData;
+      currentImageIndex += direction;
+
+      if (currentImageIndex >= data.length) {
+        currentImageIndex = 0;
+      } else if (currentImageIndex < 0) {
+        currentImageIndex = data.length - 1;
+      }
+
+      openModal(currentSection, currentImageIndex);
+    }
+
+    // Event listeners
+    document.getElementById('imageModal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      const modal = document.getElementById('imageModal');
+      if (modal.classList.contains('active')) {
+        if (e.key === 'Escape') {
+          closeModal();
+        } else if (e.key === 'ArrowLeft') {
+          changeImage(-1);
+        } else if (e.key === 'ArrowRight') {
+          changeImage(1);
         }
+      }
+    });
 
-        // Mettre à jour les indicateurs
-        function updateScrollIndicators() {
-            const dots = document.querySelectorAll('.scroll-dot');
-            const gallery = document.getElementById('galleryScroll');
-            const itemWidth = 320 + 32;
-            const itemsPerView = Math.floor(gallery.clientWidth / itemWidth);
-            const currentPage = Math.floor(currentScrollPosition / (itemsPerView * itemWidth));
-            
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentPage);
-            });
-        }
+    // Initialiser au chargement
+    window.addEventListener('load', () => {
+      initScrollIndicators('newspaper');
+      initScrollIndicators('media');
+    });
 
-        // Fonctions du modal (identiques à la version précédente)
-        function openModal(index) {
-            currentImageIndex = index;
-            const modal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalDescription = document.getElementById('modalDescription');
-            const currentNumber = document.getElementById('currentImageNumber');
-
-            modalImage.src = galleryData[index].src;
-            modalTitle.textContent = galleryData[index].title;
-            modalDescription.textContent = galleryData[index].description;
-            currentNumber.textContent = index + 1;
-
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        function changeImage(direction) {
-            currentImageIndex += direction;
-            
-            if (currentImageIndex >= galleryData.length) {
-                currentImageIndex = 0;
-            } else if (currentImageIndex < 0) {
-                currentImageIndex = galleryData.length - 1;
-            }
-            
-            openModal(currentImageIndex);
-        }
-
-        // Event listeners
-        document.getElementById('imageModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        document.addEventListener('keydown', function(e) {
-            const modal = document.getElementById('imageModal');
-            if (modal.classList.contains('active')) {
-                if (e.key === 'Escape') {
-                    closeModal();
-                } else if (e.key === 'ArrowLeft') {
-                    changeImage(-1);
-                } else if (e.key === 'ArrowRight') {
-                    changeImage(1);
-                }
-            }
-        });
-
-        // Initialiser au chargement
-        window.addEventListener('load', () => {
-            initScrollIndicators();
-        });
-
-        // Réinitialiser lors du redimensionnement
-        window.addEventListener('resize', () => {
-            initScrollIndicators();
-            currentScrollPosition = 0;
-            document.getElementById('galleryScroll').scrollTo({ left: 0 });
-        });
-    </script>
+    // Réinitialiser lors du redimensionnement
+    window.addEventListener('resize', () => {
+      initScrollIndicators('newspaper');
+      initScrollIndicators('media');
+      currentScrollPositions.newspaper = 0;
+      currentScrollPositions.media = 0;
+      document.getElementById('newspaperGallery').scrollTo({ left: 0 });
+      document.getElementById('mediaGallery').scrollTo({ left: 0 });
+    });
+  </script>
 </body>
+
 </html>
