@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Culture Management - Ahmed Guerfell</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modal-styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -43,13 +44,13 @@
     <section id="culture-management" class="section culture-management">
         <div class="section-bg"></div>
         <div class="section-header">
-            <h1>Culture management</h1>
-            <p>Ici, vous trouverez des informations sur mes rôles dans la gestion et la direction de projets culturels et d'institutions.</p>
-            <p>Cette section met en évidence mes efforts pour promouvoir le patrimoine culturel, organiser des festivals et diriger des initiatives qui comblent les lacunes culturelles.</p>
+            <h1></h1>
+            <p></p>
+            <p></p>
         </div>
         
         <div class="projects-grid">
-            <div class="project-card">
+            <div class="project-card" onclick="openProjectModal('culture', 0)">
                 <div class="project-image">
                     <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=300&fit=crop" alt="Camp d'Été 24">
                 </div>
@@ -59,7 +60,7 @@
                 </div>
             </div>
             
-            <div class="project-card">
+            <div class="project-card" onclick="openProjectModal('culture', 1)">
                 <div class="project-image">
                     <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400&h=300&fit=crop" alt="Festival Paysages d'Espoir">
                 </div>
@@ -69,7 +70,7 @@
                 </div>
             </div>
             
-            <div class="project-card">
+            <div class="project-card" onclick="openProjectModal('culture', 2)">
                 <div class="project-image">
                     <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=400&h=300&fit=crop" alt="Atelier de Formation en Gestion Culturelle">
                 </div>
@@ -79,7 +80,7 @@
                 </div>
             </div>
             
-            <div class="project-card">
+            <div class="project-card" onclick="openProjectModal('culture', 3)">
                 <div class="project-image">
                     <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=400&h=300&fit=crop" alt="Lieux Civiques Culturels">
                 </div>
@@ -91,6 +92,31 @@
         </div>
     </section>
 
+    <!-- Modal pour les projets -->
+    <div id="projectModal" class="project-modal">
+        <div class="modal-overlay" onclick="closeProjectModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProjectModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <img id="modalImage" src="/placeholder.svg" alt="" class="modal-project-image">
+                <div class="modal-project-info">
+                    <h2 id="modalTitle"></h2>
+                    <div class="modal-meta">
+                        <span id="modalCategory" class="modal-badge"></span>
+                        <span id="modalDate" class="modal-badge"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription"></p>
+                <div id="modalDetails" class="modal-details"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+    <script src="project-modal.js"></script>
 </body>
 </html>
