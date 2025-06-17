@@ -414,19 +414,19 @@ body {
 
 .section-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 .section-header h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #320606;
   margin-bottom: 1rem;
   font-weight: 600;
 }
 
 .section-header p {
   font-size: 1.1rem;
-  color: #666;
+  color: #960e0e;
   max-width: 600px;
   margin: 0 auto;
 }
