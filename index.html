@@ -1,147 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed Guerfell - Culture Worker & Artist</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahmed Guerfell - Culture Worker & Artist</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
-    <!-- Navigation stable -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="logo-circle">
-                    <div class="logo-rays"></div>
-                    <div class="logo-waves"></div>
-                </div>
-                <div class="logo-text">
-                    <span class="logo-main">AHMED GUERFELL</span>
-                    <span class="logo-sub">CULTURE WORKER</span>
-                </div>
-            </div>          
-            <div class="nav-menu">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="social-practice.html" class="nav-link">Social Practice</a>
-                <a href="artistic-practice.html" class="nav-link">Artistic Practice</a>
-                <a href="culture-management.html" class="nav-link">Culture Management</a>
-                <a href="public-speaking.html" class="nav-link">Public Speaking</a>
-                <a href="media-coverage.html" class="nav-link">Media Coverage</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </div>
+  <!-- Navigation stable -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-circle">
+          <div class="logo-rays"></div>
+          <div class="logo-waves"></div>
+        </div>
+        <div class="logo-text">
+          <span class="logo-main">AHMED GUERFELL</span>
+          <span class="logo-sub">CULTURE WORKER</span>
+        </div>
+      </div>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="social-practice.html" class="nav-link">Social Practice</a>
+        <a href="artistic-practice.html" class="nav-link">Artistic Practice</a>
+        <a href="culture-management.html" class="nav-link">Culture Management</a>
+        <a href="public-speaking.html" class="nav-link">Public Speaking</a>
+        <a href="media-coverage.html" class="nav-link">Media Coverage</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
 
-            <button class="nav-toggle" id="mobile-menu">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-        </div>
-    </nav>
-    <!-- Hero Section avec texte mieux organisé -->
-    <section class="hero-section">
-        <div class="hero-background">
-            <div class="hero-slide active" style="background-image: url('https://res.cloudinary.com/dxftqgx5t/image/upload/v1750235427/WADE_2023-11-25_-_05_bv5yho.jpg');">
-                <div class="slide-overlay"></div>
-            </div>
-            <div class="hero-slide" style="background-image: url('images/21.webp');">
-                <div class="slide-overlay"></div>
-            </div>
-            <div class="hero-slide" style="background-image:url('images/22.webp') ;">
-                <div class="slide-overlay"></div>
-            </div>
-        </div>
-        <!-- Navigation du slider -->
-        <div class="slider-controls">
-            <div class="slider-indicators">
-                <button class="slider-dot active" onclick="changeSlide(0)"></button>
-                <button class="slider-dot" onclick="changeSlide(1)"></button>
-                <button class="slider-dot" onclick="changeSlide(2)"></button>
-            </div>
-            <div class="slider-arrows">
-                <button class="slider-arrow prev" onclick="previousSlide()">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="slider-arrow next" onclick="nextSlide()">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-    <!-- Section Aperçu des Pratiques -->
-    <section class="practices-preview">
-        <div class="container">
-            <div class="section-header">
-                <h2>My Areas of Expertise</h2>
-                <p>Discover the different facets of my artistic and cultural work</p>
-            </div>
-            
-            <div class="practices-grid">
-                <div class="practice-card">
-                    <div class="practice-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Social Practice</h3>
-                    <p>Community initiatives and social development projects through art.</p>
-                    <a href="social-practice.html" class="practice-link">
-                        <span>Explore</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                
-                <div class="practice-card">
-                    <div class="practice-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3>Artistic Practice</h3>
-                    <p>Contemporary artistic creations and innovative performances.</p>
-                    <a href="artistic-practice.html" class="practice-link">
-                        <span>Explore</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                
-                <div class="practice-card">
-                    <div class="practice-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3>Culture Management</h3>
-                    <p>Management and direction of cultural projects and artistic institutions.</p>
-                    <a href="culture-management.html" class="practice-link">
-                        <span>Explore</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                
-                <div class="practice-card">
-                    <div class="practice-icon">
-                        <i class="fas fa-microphone"></i>
-                    </div>
-                    <h3>Public Speaking</h3>
-                    <p>Conferences and interventions on art, culture and social change.</p>
-                    <a href="public-speaking.html" class="practice-link">
-                        <span>Explore</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+      <button class="nav-toggle" id="mobile-menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </nav>
 
-    <!-- Section Citation -->
-    <section class="quote-section">
-        <div class="container">
-            <div class="quote-content">
-                <blockquote>
-                    "We Belive That Art Is a Way Of Resistance "
-                </blockquote>
-                <cite>— Ahmed Guerfell</cite>
-            </div>
-        </div>
-    </section>
 
-    <script src="script.js"></script>
+
+  <!-- Hero Section avec texte mieux organisé -->
+  <section class="hero-section">
+    <div class="hero-background">
+      <div class="hero-slide"
+        style="background-image: url('https://res.cloudinary.com/dxftqgx5t/image/upload/v1750427916/480727757_683982483958717_3422850853701177363_n_mckfhh.jpg');">
+        <div class="slide-overlay"></div>
+      </div>
+      <div class="hero-slide active"
+        style="background-image: url('https://res.cloudinary.com/dxftqgx5t/image/upload/v1750427916/480919449_683982540625378_7359566320123871292_n_gfuo6n.jpg');">
+        <div class="slide-overlay"></div>
+      </div>
+
+      <div class="hero-slide"
+        style="background-image: url('https://res.cloudinary.com/dxftqgx5t/image/upload/v1750257081/02_yqsode.webp');">
+        <div class="slide-overlay"></div>
+      </div>
+      <div class="hero-slide"
+        style="background-image: url('https://res.cloudinary.com/dxftqgx5t/image/upload/v1750257081/04_myk47w.webp');">
+        <div class="slide-overlay"></div>
+      </div>
+      <div class="hero-slide"
+        style="background-image: url('https://res.cloudinary.com/dxftqgx5t/image/upload/v1750257081/05_hlsnhn.webp');">
+        <div class="slide-overlay"></div>
+      </div>
+    </div>
+    <!-- Navigation du slider -->
+    <div class="slider-controls">
+      <div class="slider-indicators">
+        <button class="slider-dot active" onclick="changeSlide(0)"></button>
+        <button class="slider-dot" onclick="changeSlide(1)"></button>
+        <button class="slider-dot" onclick="changeSlide(2)"></button>
+      </div>
+      <div class="slider-arrows">
+        <button class="slider-arrow prev" onclick="previousSlide()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="slider-arrow next" onclick="nextSlide()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+  <!-- Section Aperçu des Pratiques -->
+  <section class="practices-preview">
+    <div class="container">
+      <div class="section-header">
+        <h2>My Areas of Expertise</h2>
+        <p>Discover the different facets of my artistic and cultural work</p>
+      </div>
+
+      <div class="practices-grid">
+        <div class="practice-card">
+          <div class="practice-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Social Practice</h3>
+          <p>Community initiatives and social development projects through art.</p>
+          <a href="social-practice.html" class="practice-link">
+            <span>Explore</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="practice-card">
+          <div class="practice-icon">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3>Artistic Practice</h3>
+          <p>Contemporary artistic creations and innovative performances.</p>
+          <a href="artistic-practice.html" class="practice-link">
+            <span>Explore</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="practice-card">
+          <div class="practice-icon">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <h3>Culture Management</h3>
+          <p>Management and direction of cultural projects and artistic institutions.</p>
+          <a href="culture-management.html" class="practice-link">
+            <span>Explore</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="practice-card">
+          <div class="practice-icon">
+            <i class="fas fa-microphone"></i>
+          </div>
+          <h3>Public Speaking</h3>
+          <p>Conferences and interventions on art, culture and social change.</p>
+          <a href="public-speaking.html" class="practice-link">
+            <span>Explore</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Citation -->
+  <section class="quote-section">
+    <div class="container">
+      <div class="quote-content">
+        <blockquote>
+          "We Belive That Art Is a Way Of Resistance "
+        </blockquote>
+        <cite>— Ahmed Guerfell</cite>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
 </body>
+
 </html>
